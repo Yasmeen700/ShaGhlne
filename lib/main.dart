@@ -25,6 +25,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  //the list of pages for the navbar to switch between
+  final List<Widget> pages = [
+    AddJob(),
+    Container(
+      child: RaisedButton(
+        onPressed: () {},
+        child: Text('page2'),
+      ),
+    ),
+    Container(
+      child: RaisedButton(
+        onPressed: () {},
+        child: Text('page3'),
+      ),
+    )
+  ];
+  final PageStorageBucket bucket = PageStorageBucket();
+  int _selectedIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,26 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: CurvedNavigationBar(
         index: 1,
-        height: 50,
+        height: 75.0,
         animationDuration: Duration(milliseconds: 150),
         animationCurve: Curves.bounceInOut,
-        backgroundColor: Color(0xff1c1922),
+        backgroundColor: Colors.transparent,
         items: <Widget>[
-         GestureDetector(
-
-
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                //   return AddJob();
-                // }));
-                Get.to(AddJob());
-              },
-
-              child: Icon(
-                Icons.add,
-                size: 30,
-                color: Color(0xff1c1922),
-              )),
+          Icon(
+            Icons.add,
+            size: 30,
+            color: Color(0xff1c1922),
+          ),
           Icon(
             Icons.menu_rounded,
             size: 30,
@@ -69,18 +78,20 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Color(0xff1c1922),
           ),
         ],
-        onTap: (index) {},
+        onTap: (index) {
+          print(index);
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.height,
         color: Color(0xff1c1922),
-        child: Column(
-          children: [
-
-             Text('Hello'),
-
-          ],
+        child: PageStorage(
+          child: pages[_selectedIndex],
+          bucket: bucket,
         ),
       ),
     );
