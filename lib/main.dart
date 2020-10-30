@@ -1,21 +1,19 @@
-  import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app1/constant/strings.dart';
-
+import './ui/add_job_listing.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: Strings.AppName,
-      // theme: ThemeData(
-      //   visualDensity: VisualDensity.adaptivePlatformDensity,
-      // ),
-       home: MyHomePage(),
+      theme: ThemeData.dark(),
+      home: MyHomePage(),
     );
   }
 }
@@ -30,41 +28,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: Color(0xff1c1922),
-        centerTitle: true,
-        title: Text(Strings.AppName,style: TextStyle(color: Colors.white),),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: Color(0xff1c1922),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('demo text',
-            style: TextStyle( color:Colors.white),),
-          ],
+        title: Text(
+          Strings.AppName,
+          style: TextStyle(color: Colors.black),
         ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
-        index: 1,
+        height: 50,
+        animationDuration: Duration(milliseconds: 150),
         animationCurve: Curves.bounceInOut,
-        animationDuration: Duration(milliseconds: 100),
-        color:Colors.white ,
-          backgroundColor:Color(0xff1c1922) ,
-          buttonBackgroundColor:  Colors.white,
-          height: 50.0,
-          items: <Widget>[
-            Icon(Icons.add, size: 30,color: Color(0xff1c1922),),
-            Icon(Icons.list, size: 30,color:Color(0xff1c1922),),
-            Icon(Icons.compare_arrows, size: 30,color:Color(0xff1c1922),),
+        backgroundColor: Color(0xff1c1922),
+        items: <Widget>[
+          Icon(Icons.add, size: 30,color:Color(0xff1c1922),),
+          Icon(Icons.list, size: 30,color: Color(0xff1c1922),),
+          Icon(Icons.compare_arrows, size: 30,color: Color(0xff1c1922),),
+        ],
+        onTap: (index) {
+        },
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.height,
+        color: Color(0xff1c1922),
+        child: Column(
+          children: [
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AddJob();
+                }));
+              },
+              child: Text('Hello'),
+            )
           ],
-              onTap: (index){
-            debugPrint('current index is $index');
-    },
+        ),
       ),
     );
-
   }
 }
