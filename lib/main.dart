@@ -3,6 +3,7 @@ import 'package:flutter_app1/constant/strings.dart';
 import './ui/add_job_listing.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:get/get.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -11,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-
       title: Strings.AppName,
       theme: ThemeData.dark(),
       home: MyHomePage(),
@@ -32,8 +32,9 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color(0xff1c1922),
         title: Text(
           Strings.AppName,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
+        centerTitle: true,
       ),
       bottomNavigationBar: CurvedNavigationBar(
         index: 1,
@@ -42,12 +43,33 @@ class _MyHomePageState extends State<MyHomePage> {
         animationCurve: Curves.bounceInOut,
         backgroundColor: Color(0xff1c1922),
         items: <Widget>[
-          Icon(Icons.add, size: 30,color:Color(0xff1c1922),),
-          Icon(Icons.menu_rounded, size: 30,color: Color(0xff1c1922),),
-          Icon(Icons.save_alt, size: 30,color: Color(0xff1c1922),),
+         GestureDetector(
+
+
+              onTap: () {
+                // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                //   return AddJob();
+                // }));
+                Get.to(AddJob());
+              },
+
+              child: Icon(
+                Icons.add,
+                size: 30,
+                color: Color(0xff1c1922),
+              )),
+          Icon(
+            Icons.menu_rounded,
+            size: 30,
+            color: Color(0xff1c1922),
+          ),
+          Icon(
+            Icons.save_alt,
+            size: 30,
+            color: Color(0xff1c1922),
+          ),
         ],
-        onTap: (index) {
-        },
+        onTap: (index) {},
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -55,15 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
         color: Color(0xff1c1922),
         child: Column(
           children: [
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddJob();
-                }
-                ));
-              },
-              child: Text('Hello'),
-            )
+
+             Text('Hello'),
+
           ],
         ),
       ),
